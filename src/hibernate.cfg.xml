@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!-- <property name="connection.url">jdbc:mysql://localhost:3306/empleados?createDatabaseIfNotExist=true&amp;serverTimezone=UTC</property> URL -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/HospitalDB?&amp;serverTimezone=UTC</property>
+        <property name="connection.username">root</property> <!--Nombre USUARIO -->
+        <property name="connection.password">123abc</property> <!--Contraseña -->
+        <property name="hbm2ddl.auto">validate</property> <!-- Cambiamos el CREATE(en minúsculas) de aqui para que no cree una BBDD nueva cada vez que se ejecute-->
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.dialect.storage_engine">innodb</property>
+        <property name="hibernate.show_sql">true</property>
+
+        <!--  mapping de las clases-->
+        <mapping class="entidades.Doctor"/>
+        <mapping class="entidades.Cita"/>
+        <mapping class="entidades.Hospital"/>
+        <mapping class="entidades.Paciente"/>
+        <mapping class="entidades.Recibe"/>
+        <mapping class="entidades.Tratamiento"/>
+
+
+    </session-factory>
+</hibernate-configuration>
