@@ -2,7 +2,7 @@ package entidades;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Set;
 
 @Entity
@@ -19,7 +19,7 @@ public class Cita {
     private String estado;
 
     @OneToOne()
-    @JoinColumn(name = "id_doctor")
+    @JoinColumn(name = "id_doctor", unique = true)
     private Doctor doctor;
 
     public void setDoctor(Doctor doctor) {
@@ -34,4 +34,47 @@ public class Cita {
         this.paciente = paciente;
     }
 
+    public Cita() {
+
+    }
+
+    public Cita(int id, Date fecha, String estado, Doctor doctor, Paciente paciente) {
+        this.id = id;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.doctor = doctor;
+        this.paciente = paciente;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
 }
