@@ -26,9 +26,10 @@ public class RepoCita implements Repositorio<Cita>{
     }
 
     @Override
-    public Paciente obtener(String nombre) {
+    public Cita obtener(String nombre) {
         return null;
     }
+
 
     @Override
     public void actualizar(Cita cita) {

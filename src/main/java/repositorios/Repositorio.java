@@ -9,7 +9,7 @@ public interface Repositorio<T> {
     void guardar(T t);
     T obtener(int id);
 
-    Paciente obtener(String nombre);
+    T obtener(String nombre);
 
     //T obtener(String n);
     void actualizar(T t);

@@ -32,7 +32,7 @@ public class RepoDoctor implements Repositorio<Doctor>{
     }
 
     @Override
-    public Paciente obtener(String nombre) {
+    public Doctor obtener(String nombre) {
         return null;
     }
 

@@ -1,8 +1,11 @@
 package repositorios;
 
+import org.hibernate.query.Query;
 import entidades.Paciente;
 import entidades.Tratamiento;
 import org.hibernate.Session;
+
+import java.util.List;
 
 public class RepoTratamiento implements Repositorio<Tratamiento>{
 
@@ -23,9 +26,10 @@ public class RepoTratamiento implements Repositorio<Tratamiento>{
     }
 
     @Override
-    public Paciente obtener(String nombre) {
+    public Tratamiento obtener(String nombre) {
         return null;
     }
+
 
     @Override
     public void actualizar(Tratamiento tratamiento) {
@@ -41,4 +45,10 @@ public class RepoTratamiento implements Repositorio<Tratamiento>{
     public void eliminar(String nombre) {
 
     }
+
+    public List<Tratamiento> obtenerTodos(){
+        Query<Tratamiento> query = session.createQuery("FROM Tratamiento", Tratamiento.class);
+        return query.getResultList();
+    }
+
 }

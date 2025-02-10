@@ -6,10 +6,14 @@ package org.example;
  */
 
 import entidades.Doctor;
+import entidades.Hospital;
 import entidades.Paciente;
+import entidades.Tratamiento;
 import org.hibernate.Session;
 import repositorios.RepoDoctor;
+import repositorios.RepoHospital;
 import repositorios.RepoPaciente;
+import repositorios.RepoTratamiento;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +30,8 @@ public class App
         //enlazar los repos con la sesion
         RepoDoctor repoDoctor = new RepoDoctor(session);
         RepoPaciente repoPaciente = new RepoPaciente(session);
+        RepoHospital repoHospital = new RepoHospital(session);
+        RepoTratamiento repoTratamiento = new RepoTratamiento(session);
 
         Scanner leer = new Scanner(System.in);
         int orden;
@@ -41,7 +47,13 @@ public class App
             System.out.println("6. Crear pacientes");
             System.out.println("7. Modificar pacientes");
             System.out.println("8. Eliminar paciente");
-            System.out.println("9. SALIR");
+            System.out.println("9. Asignar un doctor a un paciente");
+            System.out.println("10. Indicar la fecha de fin del tratamiento de un paciente");
+            System.out.println("11. Cambiar el hospital de un tratamiento");
+            System.out.println("12. Mostrar los datos de un paciente TODO");
+            System.out.println("13. Mostrar los datos de los tratamientos y el hospital en el que se realiza");
+            System.out.println("14. Mostrar los datos de los tratamientos y el hospital que introduzca el usuario");
+            System.out.println("15. SALIR");
             orden = leer.nextInt();
 
             switch (orden) {
@@ -183,7 +195,7 @@ public class App
                         pacienteExistente.setFechaNacimiento_Paciente(nuevaFechaNac);
                         pacienteExistente.setDireccion_Paciente(nuevaDireccion);
 
-                        // Llamar al método actualizar para guardar los cambios
+                        // Llamar al metodo actualizar para guardar los cambios
                         repoPaciente.actualizar(pacienteExistente);  // Ahora pasamos el paciente completo
                         System.out.println("Paciente actualizado");
                     }
@@ -198,10 +210,72 @@ public class App
                     repoPaciente.eliminar(nomEliminar);
 
                     break;
+                case 9: //Asignar paciente-doctor
+                    break;
+                case 10: //Asignar fecha de fin de tratamiento
 
+                    System.out.println("Dime el nombre del paciente");
+                    String nomPacR = leer.nextLine();
+                    System.out.println("Dime el ID del tipo de tratamiento que recibe");
+                    String nomTraR = leer.nextLine();
+                    System.out.println("Dime la fecha de inicio del tratamiento");
+                    String fechaIni = leer.nextLine();
+                    System.out.println("Dime la fecha de fin del tratamiento");
+                    String fechaFin = leer.nextLine();
+
+
+
+
+                    break;
+                case 13:
+
+                    System.out.println("Dime el nombre del Hospital");
+                    leer.nextLine();
+                    String nomH = leer.nextLine();
+                    //Hay que poner la lista
+
+                    
+                    repoHospital.obtener(nomH);
+
+
+                    /*
+                    List<Hospital> hospitales = repoHospital.obtenerTodos();
+                    List<Tratamiento> tratamientos = repoTratamiento.obtenerTodos();
+
+                     */
+
+                    /*
+                    for (Tratamiento tratamiento : tratamientos){
+                        System.out.println("IDT["+tratamiento.getId_Tratamiento()+"] TIPO["+tratamiento.getTipoTratamietno()+"] COSTO["+tratamiento.getCosto_Tratamiento()+"]");
+                    }
+
+                    for (Hospital hospital : hopitales){
+                        System.out.println("IDH["+hospital.getId_Hospital()+"] NOMBRE["+hospital.getNombre_Hospital()+"] UBICACIÓN["+hospital.getUbicacion_Hospital()+"]");
+                    }
+
+                     */
+
+                   // int maxSize = Math.max(hospitales.size(), tratamientos.size());
+                    /*
+                    for (Hospital hospital : hospitales) {
+                        System.out.println("IDH[" + hospital.getId_Hospital() +
+                                "] NOMBRE[" + hospital.getNombre_Hospital() +
+                                "] UBICACIÓN[" + hospital.getUbicacion_Hospital() + "]");
+
+                        for (Tratamiento tratamiento : tratamientos) {
+                            if (tratamiento.getId_Tratamiento() == hospital.getId_Hospital()) {  //Los relacionamos por el ID
+                                System.out.println(" IDT[" + tratamiento.getId_Tratamiento() +
+                                        "] TIPO[" + tratamiento.getTipoTratamietno() +
+                                        "] COSTO[" + tratamiento.getCosto_Tratamiento() + "]");
+                            }
+                        }
+                    }
+                    */
+
+                    break;
             }
 
-        }while (orden != 9);
+        }while (orden != 15);
 
 
 

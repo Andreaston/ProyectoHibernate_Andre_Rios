@@ -24,9 +24,10 @@ public class RepoRecibe implements Repositorio<Recibe>{
     }
 
     @Override
-    public Paciente obtener(String nombre) {
+    public Recibe obtener(String nombre) {
         return null;
     }
+
 
     @Override
     public void actualizar(Recibe recibe) {
