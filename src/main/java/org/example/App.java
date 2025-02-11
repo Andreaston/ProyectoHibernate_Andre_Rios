@@ -234,8 +234,27 @@ public class App
                     String nomH = leer.nextLine();
                     //Hay que poner la lista
 
-                    
-                    repoHospital.obtener(nomH);
+                    Tratamiento tratamiento = repoTratamiento.obtener(nomH);
+
+                    if (tratamiento != null){
+
+                        Hospital hospital = tratamiento.getHospital();
+
+                        System.out.println("=======INFORMACIÓN DEL TRATAMIENTO=======");
+                        System.out.println("IDT["+tratamiento.getId_Tratamiento()+"] TIPO["+tratamiento.getTipoTratamiento()+"] COSTO["+tratamiento.getCosto_Tratamiento()+"]");
+                        if (hospital != null){
+                            System.out.println("=======INFORMACIÓN DEL HOSPITAL=======");
+                            System.out.println("IDH["+hospital.getId_Hospital()+"] NOMBRE["+hospital.getNombre_Hospital()+"] UBICACIÓN["+hospital.getUbicacion_Hospital()+"]");
+
+                        }else {
+                            System.out.println("No encontré el hospital. Sorry");
+                        }
+
+
+                    }else {
+                        System.out.println("No encontré el tratamiento. Sorry");
+                    }
+
 
 
                     /*

@@ -15,7 +15,7 @@ public class Tratamiento {
     @Column(name = "id")
     private int id_Tratamiento;
     @Column(name = "tipo")
-    private String tipoTratamietno;
+    private String tipoTratamiento;
     @Column(name = "costo")
     private BigDecimal costo_Tratamiento;
 
@@ -34,7 +34,7 @@ public class Tratamiento {
 
     public Tratamiento(int id_Tratamiento, String tipoTratamietno, BigDecimal costo_Tratamiento, Set<Recibe> recibes, Hospital hospital) {
         this.id_Tratamiento = id_Tratamiento;
-        this.tipoTratamietno = tipoTratamietno;
+        this.tipoTratamiento = tipoTratamietno;
         this.costo_Tratamiento = costo_Tratamiento;
         this.recibes = recibes;
         this.hospital = hospital;
@@ -48,12 +48,12 @@ public class Tratamiento {
         this.id_Tratamiento = id_Tratamiento;
     }
 
-    public String getTipoTratamietno() {
-        return tipoTratamietno;
+    public String getTipoTratamiento() {
+        return tipoTratamiento;
     }
 
-    public void setTipoTratamietno(String tipoTratamietno) {
-        this.tipoTratamietno = tipoTratamietno;
+    public void setTipoTratamiento(String tipoTratamiento) {
+        this.tipoTratamiento = tipoTratamiento;
     }
 
     public BigDecimal getCosto_Tratamiento() {

@@ -23,7 +23,9 @@ public class RepoHospital implements Repositorio<Hospital>{
 
     @Override
     public Hospital obtener(int id) {
-        return null;
+        Query<Hospital> query = session.createQuery("FROM Hospital WHERE id_Hospital = :id");
+        query.setParameter("id",id);
+        return query.uniqueResult();
     }
 
     @Override

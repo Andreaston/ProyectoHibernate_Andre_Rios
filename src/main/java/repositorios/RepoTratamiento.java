@@ -27,7 +27,9 @@ public class RepoTratamiento implements Repositorio<Tratamiento>{
 
     @Override
     public Tratamiento obtener(String nombre) {
-        return null;
+        Query<Tratamiento> query = session.createQuery("FROM Tratamiento WHERE tipoTratamiento = :nombre");
+        query.setParameter("nombre", nombre);
+        return query.uniqueResult();
     }
 
 
