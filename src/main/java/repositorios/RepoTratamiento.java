@@ -53,4 +53,12 @@ public class RepoTratamiento implements Repositorio<Tratamiento>{
         return query.getResultList();
     }
 
+
+    public long obtenerNumeroDeTratamientosPorHospital(String nombreHospital) {
+        Query<Long> query = session.createQuery(
+                "SELECT COUNT(t) FROM Tratamiento t WHERE t.hospital.nombre_Hospital = :nombreHospital", Long.class);
+        query.setParameter("nombreHospital", nombreHospital);
+        return query.uniqueResult();
+    }
+
 }

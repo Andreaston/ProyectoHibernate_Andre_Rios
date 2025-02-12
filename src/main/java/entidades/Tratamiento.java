@@ -79,4 +79,8 @@ public class Tratamiento {
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }
+
+    public String getTipo() {
+        return tipoTratamiento;
+    }
 }

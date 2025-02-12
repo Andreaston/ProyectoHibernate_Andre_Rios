@@ -5,15 +5,9 @@ package org.example;
  *
  */
 
-import entidades.Doctor;
-import entidades.Hospital;
-import entidades.Paciente;
-import entidades.Tratamiento;
+import entidades.*;
 import org.hibernate.Session;
-import repositorios.RepoDoctor;
-import repositorios.RepoHospital;
-import repositorios.RepoPaciente;
-import repositorios.RepoTratamiento;
+import repositorios.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +26,8 @@ public class App
         RepoPaciente repoPaciente = new RepoPaciente(session);
         RepoHospital repoHospital = new RepoHospital(session);
         RepoTratamiento repoTratamiento = new RepoTratamiento(session);
+        RepoCita repoCita = new RepoCita(session);
+        RepoRecibe repoRecibe = new RepoRecibe(session);
 
         Scanner leer = new Scanner(System.in);
         int orden;
@@ -52,7 +48,7 @@ public class App
             System.out.println("11. Cambiar el hospital de un tratamiento");
             System.out.println("12. Mostrar los datos de un paciente TODO");
             System.out.println("13. Mostrar los datos de los tratamientos y el hospital en el que se realiza");
-            System.out.println("14. Mostrar los datos de los tratamientos y el hospital que introduzca el usuario");
+            System.out.println("14. Mostrar el Nº de tratamientos del Hospital seleccionado");
             System.out.println("15. SALIR");
             orden = leer.nextInt();
 
@@ -227,6 +223,74 @@ public class App
 
 
                     break;
+
+                case 12://Mostrar TODO del paciente
+                    /*
+                    System.out.println("Dime que paciente quieres buscar: ");
+                    leer.nextLine();
+                    String pacBus = leer.nextLine();
+
+                    Paciente paciente = repoPaciente.obtener(pacBus);
+
+                    if (paciente != null){
+
+                        Cita cita = (Cita) paciente.getCitas();
+                        Recibe recibe = (Recibe) paciente.getRecibe();
+
+                        if (cita == null || recibe == null){
+                            System.out.println("No encontré la cita o el tratamiento");
+                        }else {
+                            System.out.println("IDP["+paciente.getId_Paciente()+"] NOMBRE["+paciente.getNombre_Paciente()+"] FECHA NACIMIENTO["+paciente.getFechaNacimiento_Paciente()+"] DIRECCIÓN["+paciente.getDireccion_Paciente()+"] IDCITA["+cita.getId()+"] IDTRATAMIENTO["+recibe.getTratamiento()+"]");
+                        }
+
+
+                    }else {
+                        System.out.println("No encontré el paciente");
+                    }
+
+                     */
+
+                    // Pedir el nombre del paciente
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.print("Introduce el nombre del paciente: ");
+                    String nombrePaciente = scanner.nextLine();
+
+                    // Obtener paciente por nombre
+                    Paciente paciente = repoPaciente.obtener(nombrePaciente);
+
+                    if (paciente == null) {
+                        System.out.println("Paciente no encontrado.");
+                    } else {
+                        System.out.println("\n Datos del Paciente:");
+                        System.out.println("ID: " + paciente.getId_Paciente());
+                        System.out.println("Nombre: " + paciente.getNombre_Paciente());
+                        System.out.println("Fecha de Nacimiento: " + paciente.getFechaNacimiento_Paciente());
+                        System.out.println("Dirección: " + paciente.getDireccion_Paciente());
+
+                        // Obtener y mostrar citas
+                        List<Cita> citas = repoCita.obtenerCitasPaciente(paciente.getId_Paciente());
+                        System.out.println("\n Citas del Paciente:");
+                        if (citas.isEmpty()) {
+                            System.out.println("  → No tiene citas registradas.");
+                        } else {
+                            for (Cita cita : citas) {
+                                System.out.println("  → ID Cita: " + cita.getId() + " | Fecha: " + cita.getFecha() + " | Estado: " + cita.getEstado());
+                            }
+                        }
+
+                        // Obtener y mostrar tratamientos
+                        List<Recibe> tratamientos = repoRecibe.obtenerTratamientoPaciente(paciente.getId_Paciente());
+                        System.out.println("\n Tratamientos Recibidos:");
+                        if (tratamientos.isEmpty()) {
+                            System.out.println("  → No recibe tratamientos.");
+                        } else {
+                            for (Recibe recibe : tratamientos) {
+                                System.out.println("  → Tratamiento: " + recibe.getTratamiento().getTipo() + " | Desde: " + recibe.getFechaInicio() + " | Hasta: " + recibe.getFechaFin());
+                            }
+                        }
+                    }
+
+                    break;
                 case 13:
 
                     System.out.println("Dime el nombre del Hospital");
@@ -291,6 +355,23 @@ public class App
                     }
                     */
 
+                    break;
+                case 14:
+                    // Pedir el nombre del hospital
+                    System.out.println("Introduce el nombre del hospital:");
+                    leer.nextLine();  // Consumir la línea anterior
+                    String nombreHospital = leer.nextLine();
+
+                    // Llamar al método del repositorio para obtener el número de tratamientos
+                    long numeroDeTratamientos = repoTratamiento.obtenerNumeroDeTratamientosPorHospital(nombreHospital);
+
+                    // Mostrar el resultado
+                    if (numeroDeTratamientos >= 0) {
+                        System.out.println("El" +
+                                " " + nombreHospital + " tiene " + numeroDeTratamientos + " tratamientos.");
+                    } else {
+                        System.out.println("No se encontró el hospital con el nombre: " + nombreHospital);
+                    }
                     break;
             }
 

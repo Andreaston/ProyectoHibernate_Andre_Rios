@@ -4,6 +4,9 @@ package repositorios;
 import entidades.Cita;
 import entidades.Paciente;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class RepoCita implements Repositorio<Cita>{
 
@@ -22,7 +25,9 @@ public class RepoCita implements Repositorio<Cita>{
 
     @Override
     public Cita obtener(int id) {
-        return null;
+        Query<Cita> query = session.createQuery("FROM Cita WHERE paciente = : id", Cita.class);
+        query.setParameter("id",id);
+        return query.uniqueResult();
     }
 
     @Override
@@ -45,4 +50,11 @@ public class RepoCita implements Repositorio<Cita>{
     public void eliminar(String nombre) {
 
     }
+
+    public List<Cita> obtenerCitasPaciente(int idPaciente){
+        Query<Cita> query = session.createQuery("FROM Cita WHERE paciente.id = :idPaciente", Cita.class);
+        query.setParameter("idPaciente",idPaciente);
+        return query.getResultList();
+    }
+
 }

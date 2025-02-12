@@ -3,6 +3,9 @@ package repositorios;
 import entidades.Paciente;
 import entidades.Recibe;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class RepoRecibe implements Repositorio<Recibe>{
 
@@ -43,4 +46,11 @@ public class RepoRecibe implements Repositorio<Recibe>{
     public void eliminar(String nombre) {
 
     }
+
+    public List<Recibe> obtenerTratamientoPaciente(int idPaciente){
+        Query<Recibe> query = session.createQuery("FROM Recibe WHERE paciente.id_Paciente = :idPaciente", Recibe.class);
+        query.setParameter("idPaciente",idPaciente);
+        return query.getResultList();
+    }
+
 }
