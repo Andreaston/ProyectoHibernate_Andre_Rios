@@ -6,6 +6,7 @@ package org.example;
  */
 
 import entidades.*;
+import lombok.Builder;
 import org.hibernate.Session;
 import repositorios.*;
 
@@ -96,7 +97,7 @@ public class App
                     } else {
                         System.out.print("Nuevo nombre (actual: " + docExiste.getNombre() + "): ");
                         String nuevoNombre = leer.next();
-                        leer.next();
+
                         System.out.print("Nueva especialidad (actual: " + docExiste.getEspecialidad() + "): ");
                         String nuevaEspecialidad = leer.next();
 
@@ -207,9 +208,12 @@ public class App
 
                     break;
                 case 9: //Asignar paciente-doctor
+
+                    repoCita.asignarDoctorAPaciente();
+
                     break;
                 case 10: //Asignar fecha de fin de tratamiento
-
+                    /*
                     System.out.println("Dime el nombre del paciente");
                     String nomPacR = leer.nextLine();
                     System.out.println("Dime el ID del tipo de tratamiento que recibe");
@@ -219,6 +223,18 @@ public class App
                     System.out.println("Dime la fecha de fin del tratamiento");
                     String fechaFin = leer.nextLine();
 
+                     */
+                    leer.nextLine();
+                    System.out.println("Dime el paciente");
+                    String np = leer.nextLine();
+                    System.out.println("Dime la fecha(yyyy-MM-dd)");
+                    String data = leer.nextLine();
+
+                    java.sql.Date fechaFin = java.sql.Date.valueOf(data);
+
+
+                    break;
+                case 11: //Cambiar el hospital de un tratamiento
 
 
 
@@ -293,7 +309,7 @@ public class App
                     break;
                 case 13:
 
-                    System.out.println("Dime el nombre del Hospital");
+                    System.out.println("Dime el nombre del tratamiento");
                     leer.nextLine();
                     String nomH = leer.nextLine();
                     //Hay que poner la lista
@@ -373,6 +389,8 @@ public class App
                         System.out.println("No se encontró el hospital con el nombre: " + nombreHospital);
                     }
                     break;
+                default: System.out.println("Nº fuera de rango");
+                break;
             }
 
         }while (orden != 15);
